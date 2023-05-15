@@ -10,8 +10,6 @@ dotenv.config();
     const mailFromPassword = process.env.MAIL_FROM_PASSWORD;
     const mailTo = process.env.MAIL_TO;
 
-    console.log(trackNumber, mailFrom, mailTo, mailFromPassword);
-
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 1600 });
