@@ -14,21 +14,9 @@ dotenv.config();
     const page = await browser.newPage();
     await page.setViewport({ width: 800, height: 1600 });
 
-    await page.goto("https://fozoco.com/pages/rastreio");
+    await page.goto(`https://rastreae.com.br/resultado/${trackNumber}?utm_source=rastreamento&utm_medium=email&utm_campaign=postado`);
 
-    await page.waitForSelector('#order_n');
-
-    // Type into track input
-    await page.type("#order_n", trackNumber);
-
-    await page.click('button.btn-rastreio[type=submit]');
-
-    await page.waitForSelector('.card-body-rastreio');
-
-    // Locate the full title with a unique string
-    const textSelector = await page.waitForFunction(
-      "document.querySelector('.card-body-rastreio').innerText.includes('Aqui você conseguirá acompanhar todo o status do seu pedido') === true"
-    );
+    await page.waitForSelector('.track-package');
 
     const screenshotBuffer = await page.screenshot();
 
@@ -45,7 +33,7 @@ dotenv.config();
     const mailOptions = {
       from: mailFrom,
       to: mailTo,
-      subject: "FOZOCO - Track order status",
+      subject: "Rastrea - Track order status",
       text: "Please find the screenshot attached with the current status of the order.",
       attachments: [
         {
